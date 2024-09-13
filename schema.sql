@@ -8,14 +8,14 @@ CREATE TABLE user (
     bio TEXT,
     profession TEXT,
     works_at TEXT,
-    studing_in TEXT,
+    studies_at TEXT,
     lives_in TEXT,
     public_email TEXT,  -- Visible in profile
     phone TEXT,
     link TEXT,
     about TEXT,
-    secondary_btn TEXT NOT NULL DEFAULT 'contact',  -- (cv/resume/contact)
-    secondary_btn_link TEXT NOT NULL DEFAULT '#contact',
+    secondary_btn TEXT NOT NULL DEFAULT 'about',  -- (cv/resume/about)
+    secondary_btn_link TEXT NOT NULL DEFAULT '#about',
     -- Social Media & links
     facebook TEXT,
     instagram TEXT,

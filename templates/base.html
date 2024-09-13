@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="{{ user.fname }}, {{ user.fname }} {% if user.lname %}{{ user.lname }}{% endif %}, { user.fname } {% if user.lname %}{{ user.lname }}{% endif %} Portfolio">
+    <meta name="description" content="{% user.about %}{{ user.about }}{% else %}This is my personal portfolio website.{% endif %}">
+    <!--OPG-->
+    <meta property="og:title" content="{{ user.fname }} {% if user.lname %}{{ user.lname }}{% endif %}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ user.fname }} {% if user.lname %}{{ user.lname }}{% endif %}">
+    <meta property="og:description" content="{% user.about %}{{ user.about }}{% else %}This is my personal portfolio website.{% endif %}">
+
+    <!--TO DO-->
+    <meta property="og:image" content="/static/image/avatar" alt="Wordglimpse Banner">
+
+    
+    <!--Font Awesome Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <!--Favicon Icon-->
+    <link rel="icon" href="/static/image/icon.png">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+</body>
+</html>
