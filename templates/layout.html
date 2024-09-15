@@ -10,11 +10,11 @@
     <link rel="icon" href="/static/images/user.png" />
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body class="light">
+<body class="dark">
     <!--Header-->
     <header>
         <span class="logo">Manage</span>
-        <button type="button" class="btn" onclick="toggleMenu()" title="Menu"></button>
+        <button type="button" class="btn" onclick="toggleMenu();" title="Menu">
             <i class="bi bi-list"></i>
         </button>
     </header>
@@ -31,6 +31,9 @@
             <li><a href="/logout" title="Logout">Logout</a></li>
         </ul>
     </nav>
+
+    <!--Overlay: To close sidenav-->
+    <div id="overlay" onclick="toggleMenu();"></div>
 
     <script src="/static/js/main.js"></script>
 </body>
