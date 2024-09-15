@@ -5,16 +5,6 @@
     --bg-body-tertiary: #f8f9fa;
     --text: #000;
     --shadow: 0 0 1.4px #adb5bd;
-
-    --gray-100: #f8f9fa;
-    --gray-200: #e9ecef;
-    --gray-300: #dee2e6;
-    --gray-400: #ced4da;
-    --gray-500: #adb5bd;
-    --gray-600: #6c757d;
-    --gray-700: #495057;
-    --gray-800: #343a40;
-    --gray-900: #212529;
 }
 
 .dark {
@@ -23,13 +13,6 @@
     --bg-body-tertiary: #343a40;
     --text: #fefefe;
     --shadow: none;
-}
-
-/* Typography */
-.btn {
-    border: none;
-    background-color: transparent;
-    font-size: 1rem;
 }
 
 *,*::before,*::after {box-sizing:border-box;}
@@ -43,7 +26,7 @@ body {
     color: var(--text);
 }
 
-header, main, footer {background-color: var(--bg-body);}
+header, nav, main, footer {background-color: var(--bg-body);}
 
 header {
     display: flex;
@@ -56,4 +39,19 @@ header {
     top: 0;
     left: 0;
     right: 0;
+}
+
+/* Typography */
+.logo {
+    font-size: 1.2rem;
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+.bi {
+    font-size: 1.5rem;
 }
