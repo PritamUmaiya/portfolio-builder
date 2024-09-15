@@ -1,6 +1,6 @@
 from cs50 import SQL
 from datetime import datetime, timedelta
-from flask import Flask, redirect, request, session
+from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 
 from helpers import apology, login_required
@@ -29,7 +29,8 @@ def after_request(response):
 @app.route("/")
 def index():
     """Main Index Page"""
-    return render_template("layout.html")
+    users = db.execute("SELECT * FROM user")
+    return render_template("layout.html", user=users[0])
 
 
 if __name__ == "__main__":
