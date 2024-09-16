@@ -24,7 +24,7 @@
                 <button type="button" class="btn" title="Change theme">
                     <i class="fa fa-moon"></i>
                 </button>
-                <button type="button" class="btn d-md-none" title="Menu">
+                <button type="button" class="btn d-md-none" title="Menu" onclick="toggleMenu()">
                     <i class="fa fa-bars"></i>
                 </button>
                 <a href="/logout" title="Logout" class="btn d-none d-md-inline">Logout</a>
@@ -32,9 +32,9 @@
         </div>
     </header>
 
-   <!--SideNav-->
-    <nav class="sidenav" id="sideNav">
-        <ul>
+    <!--SideNav-->
+    <nav class="sidenav bg-body" id="sideNav">
+        <ul class="list-unstyled">
             <li>
                 <a href="/dashboard" title="Dashboard" class="sidenav-link {% if active_tab == 'dashboard' %}active{% endif %}">
                     <i class="fa-solid fa-gauge-high d-none d-md-inline"></i>

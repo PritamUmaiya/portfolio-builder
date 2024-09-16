@@ -1,0 +1,64 @@
+/*Customize bootstrap*/
+.navbar {z-index: 1;}
+
+.btn:active {
+    border-color: transparent!important;
+}
+
+.sidenav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    bottom: 0;
+    z-index: 3;
+    width: 90%;
+    max-width: 270px;
+    transition: all 0.3s;
+    padding: 10px;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.left-0 {left:0;}
+
+.sidenav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--bs-body-color);
+    padding: 5px 10px;
+    margin-bottom: 2px;
+    border-radius: 5px;
+}
+
+.sidenav-link:hover {
+    color: var(--bs-primary);
+}
+
+@media (min-width:768px){
+    .sidenav {
+        left: 0;
+        top: 58px;
+        width: 25%;
+        max-width: 25%;
+    }
+    #overlay {display:none;}
+    .sidenav-link i {
+        font-size: 1.2rem;
+    }
+    .sidenav-link:hover, .sidenav-link.active {
+        color: var(--bs-body-color);
+        background-color: var(--bs-tertiary-bg);
+    }
+}
