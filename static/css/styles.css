@@ -89,6 +89,7 @@ main {
     text-decoration: none;
     color: var(--text);
     padding: 5px 10px;
+    margin-bottom: 2px;
 }
 
 .sidenav-link:hover {
@@ -106,7 +107,7 @@ main {
     .sidenav-link .bi {
         font-size: 1.3rem;
     }
-    .sidenav-link:hover {
+    .sidenav-link:hover, .sidenav-link.active {
         color: var(--text);
         background-color: var(--bg-body-tertiary);
     }

@@ -29,37 +29,37 @@
     <nav class="sidenav" id="sideNav">
         <ul>
             <li>
-                <a href="/dashboard" title="Dashboard" class="sidenav-link">
+                <a href="/dashboard" title="Dashboard" class="sidenav-link {% if active_tab == 'dashboard' %}active{% endif %}">
                     <i class="bi bi-speedometer2 d-sm-none"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/profile/manage" title="Profile" class="sidenav-link">
+                <a href="/profile/manage" title="Profile" class="sidenav-link {% if active_tab == 'profile' %}active{% endif %}">
                     <i class="bi bi-person-vcard d-sm-none"></i>
                     <span>Profile</span>
                 </a>
             </li>
             <li>
-                <a href="/portfolio/manage" title="Portfolio" class="sidenav-link">
+                <a href="/portfolio/manage" title="Portfolio" class="sidenav-link {% if active_tab == 'portfolio' %}active{% endif %}">
                     <i class="bi bi-images d-sm-none"></i>
                     <span>Portfolio</span>
                 </a>
             </li>
             <li>
-                <a href="/inbox" title="Inbox" class="sidenav-link">
+                <a href="/inbox" title="Inbox" class="sidenav-link {% if active_tab == 'inbox' %}active{% endif %}">
                     <i class="bi bi-envelope d-sm-none"></i>
                     <span>Inbox</span>
                 </a>
             </li>
             <li>
-                <a href="/account" title="Account" class="sidenav-link">
+                <a href="/account" title="Account" class="sidenav-link {% if active_tab == 'account' %}active{% endif %}">
                     <i class="bi bi-person-circle d-sm-none"></i>
                     <span>Account</span>
                 </a>
             </li>
             <li>
-                <a href="/help" title="Help" class="sidenav-link">
+                <a href="/help" title="Help" class="sidenav-link {% if active_tab == 'help' %}active{% endif %}">
                     <i class="bi bi-info-circle d-sm-none"></i>
                     <span>Help</span>
                 </a>
@@ -76,7 +76,7 @@
 
     <!--Main page content-->
     <main>
-        <h1>Main</h1>
+        {% block main %}{% endblock %}
     </main>
 
     <script src="/static/js/main.js"></script>

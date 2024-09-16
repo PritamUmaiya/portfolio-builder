@@ -29,8 +29,21 @@ def after_request(response):
 @app.route("/")
 def index():
     """Main Index Page"""
+    return render_template("index.html")
+
+
+@app.route("/dashboard")
+def dashboard():
+    """Dashboard Page"""
     users = db.execute("SELECT * FROM user")
-    return render_template("layout.html", user=users[0])
+    return render_template("dashboard.html", user=users[0], active_tab='dashboard')
+
+
+@app.route("/profile/manage")
+def profile():
+    """Profile Page"""
+    users = db.execute("SELECT * FROM user")
+    return render_template("profile.html", user=users[0], active_tab='profile')
 
 
 if __name__ == "__main__":
