@@ -18,27 +18,66 @@
             <button type="button" class="btn" id="themeToggler" title="Theme">
                 <i class="bi bi-moon" style="font-size: 1.2rem;"></i>
             </button>
-            <button type="button" class="btn" onclick="toggleMenu();" title="Menu">
+            <button type="button" class="btn d-md-none" onclick="toggleMenu();" title="Menu">
                 <i class="bi bi-list" style="font-size: 1.5rem;"></i>
             </button>
+            <a href="/logout" title="Logout" class="link d-sm-none">Logout</a>
         </div>
     </header>
 
     <!--SideNav-->
     <nav class="sidenav" id="sideNav">
         <ul>
-            <li><a href="/dashboard" title="Dashboard">Dashboard</a></li>
-            <li><a href="/profile/manage" title="Profile">Profile</a></li>
-            <li><a href="/portfolio/manage" title="Protfolio">Portfolio</a></li>
-            <li><a href="/inbox" title="Inbox">Inbox</a></li>
-            <li><a href="/account" title="Account">Account</a></li>
-            <li><a href="/help" title="Help">Help</a></li>
-            <li><a href="/logout" title="Logout">Logout</a></li>
+            <li>
+                <a href="/dashboard" title="Dashboard" class="sidenav-link">
+                    <i class="bi bi-speedometer2 d-sm-none"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/profile/manage" title="Profile" class="sidenav-link">
+                    <i class="bi bi-person-vcard d-sm-none"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+            <li>
+                <a href="/portfolio/manage" title="Portfolio" class="sidenav-link">
+                    <i class="bi bi-images d-sm-none"></i>
+                    <span>Portfolio</span>
+                </a>
+            </li>
+            <li>
+                <a href="/inbox" title="Inbox" class="sidenav-link">
+                    <i class="bi bi-envelope d-sm-none"></i>
+                    <span>Inbox</span>
+                </a>
+            </li>
+            <li>
+                <a href="/account" title="Account" class="sidenav-link">
+                    <i class="bi bi-person-circle d-sm-none"></i>
+                    <span>Account</span>
+                </a>
+            </li>
+            <li>
+                <a href="/help" title="Help" class="sidenav-link">
+                    <i class="bi bi-info-circle d-sm-none"></i>
+                    <span>Help</span>
+                </a>
+            </li>
+            <li>
+                <a href="/logout" title="Logout" class="sidenav-link d-md-none">
+                    <span>Logout</span>
+                </a>
+            </li>
         </ul>
     </nav>
-
     <!--Overlay: To close sidenav-->
     <div id="overlay" onclick="toggleMenu();"></div>
+
+    <!--Main page content-->
+    <main>
+        <h1>Main</h1>
+    </main>
 
     <script src="/static/js/main.js"></script>
 </body>
