@@ -10,13 +10,18 @@
     <link rel="icon" href="/static/images/user.png" />
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body class="dark">
+<body>
     <!--Header-->
     <header>
         <span class="logo">Manage</span>
-        <button type="button" class="btn" onclick="toggleMenu();" title="Menu">
-            <i class="bi bi-list"></i>
-        </button>
+        <div>
+            <button type="button" class="btn" id="themeToggler" title="Theme">
+                <i class="bi bi-moon" style="font-size: 1.2rem;"></i>
+            </button>
+            <button type="button" class="btn" onclick="toggleMenu();" title="Menu">
+                <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+            </button>
+        </div>
     </header>
 
     <!--SideNav-->
