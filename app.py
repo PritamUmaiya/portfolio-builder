@@ -29,7 +29,7 @@ def after_request(response):
 @app.route("/")
 def index():
     """Main Index Page"""
-    return render_template("layout.html")
+    return render_template("index.html")
 
 
 @app.route("/dashboard")

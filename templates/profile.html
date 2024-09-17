@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+    <div class="mb-3">
+        <h5 class="display-5">Edit profile</h5>
+    </div>
+
+    <!--Update Basic Info: Name, Bio, Profession, Work, School, Living Town-->
+    <div class="mb-3">
+
+        <div class="mb-3">
+            <h3>Basic Info</h3>
+        </div>
+
+        <form action="/update_basic_info" method="post">
+
+            <div class="row g-2 mb-3">
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="fname" id="fname" required>
+                        <label for="fname">First name</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="lname" id="lname">
+                        <label for="lname">Last name</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Write your bio.." aria-label="bio" name="bio" id="bio">
+                    <label for="bio">Bio</label>
+                </div>
+                <small>Introduce yourself with short bio.</small>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Works at" aria-label="works_at" name="works_at" id="works_at">
+                    <label for="works_at">Works at</label>
+                </div>
+                <small>Name of your company or organisation.</small>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Studies at" aria-label="studies_at" name="studies_at" id="studies_at">
+                    <label for="studies_at">Studies at</label>
+                </div>
+                <small>Name of your school or collage.</small>
+            </div>
+
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Living in" aria-label="Lives_in" name="lives_in" id="lives_in">
+                    <label for="lives_in">Living in</label>
+                </div>
+            </div>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
