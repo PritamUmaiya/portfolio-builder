@@ -1,18 +1,24 @@
 /*Customize bootstrap*/
+::-webkit-scrollbar {
+    display: none;
+}
+  
+ body {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+}
+
 .navbar {z-index: 1;}
 
 .btn:active {
     border-color: transparent!important;
 }
 
-.accordion-button:not(.collapsed) {
+.accordion-button, .accordion-button:focus, .accordion-button:not(.collapsed) {
     background-color: transparent;
     color: var(--bs-body-color);
-    outline:none!important;
-    border:none!important;
-}
-.accordion-button:hover {
-    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: none;
 }
 
 .btn-responsive-width {

@@ -10,72 +10,114 @@
         <h5 class="display-5">Edit profile</h5>
     </div>
 
-    <!--Update Basic Info: Name, Bio, Profession, Work, School, Living Town-->
-    <div class="accordion bg-body-secondary mb-3 p-2 rounded">
-
+    <!--Update Basic Info: Name, Bio, Profession, Work, School-->
+    <div class="accordion mb-3" id="accordionFormOne">
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#basic-info" aria-expanded="true" aria-controls="basic-info">Basic Info</button>
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Basic Info</button>
             </h2>
-        </div>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFormOne">
+                <div class="accordion-body">
+                    <form action="/update_basic_info" method="post">
 
-        <div class="accoudion-collapse collapse show" id="basic-info">
-            <div class="acordion-body pt-3">
-                <form action="/update_basic_info" method="post">
-
-                    <div class="row g-2 mb-3">
-                        <div class="col">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="fname" id="fname" required>
-                                <label for="fname">First name</label>
+                        <div class="row g-2 mb-3">
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="fname" id="fname" required>
+                                    <label for="fname">First name</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="lname" id="lname">
+                                    <label for="lname">Last name</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
+        
+                        <div class="mb-3">
                             <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="lname" id="lname">
-                                <label for="lname">Last name</label>
+                                <input type="text" class="form-control" placeholder="Write your bio.." aria-label="bio" name="bio" id="bio">
+                                <label for="bio">Bio</label>
                             </div>
+                            <small>Introduce yourself with short bio.</small>
                         </div>
-                    </div>
-    
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Write your bio.." aria-label="bio" name="bio" id="bio">
-                            <label for="bio">Bio</label>
+        
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Works at" aria-label="works_at" name="works_at" id="works_at">
+                                <label for="works_at">Works at</label>
+                            </div>
+                            <small>Name of your company or organisation.</small>
                         </div>
-                        <small>Introduce yourself with short bio.</small>
-                    </div>
-    
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Works at" aria-label="works_at" name="works_at" id="works_at">
-                            <label for="works_at">Works at</label>
+        
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Studies at" aria-label="studies_at" name="studies_at" id="studies_at">
+                                <label for="studies_at">Studies at</label>
+                            </div>
+                            <small>Name of your school or collage.</small>
                         </div>
-                        <small>Name of your company or organisation.</small>
-                    </div>
-    
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Studies at" aria-label="studies_at" name="studies_at" id="studies_at">
-                            <label for="studies_at">Studies at</label>
+        
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
                         </div>
-                        <small>Name of your school or collage.</small>
-                    </div>
-    
-                    <div class="mb-3">
-                        <div class="form-floating">
-                            <input type="text" class="form-control" placeholder="Living in" aria-label="Lives_in" name="lives_in" id="lives_in">
-                            <label for="lives_in">Living in</label>
-                        </div>
-                    </div>
-    
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-            
     </div>
 
+    <!--Update Contact details: Email, Phone, Living Town-->
+    <div class="accordion mb-3" id="accordionFormTwo">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Contact Details</button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFormTwo">
+                <div class="accordion-body">
+                    <form action="/update_contact_details" method="post">
+
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" placeholder="Public email" aria-label="public_email" name="public_email" id="public_email">
+                                <label for="public_email">Public email</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="phone" class="form-control" placeholder="Phone number" aria-label="phone" name="phone" id="phone">
+                                <label for="phone">Phone number</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" placeholder="Living in" aria-label="Lives_in" name="lives_in" id="lives_in">
+                                <label for="lives_in">Living in</label>
+                            </div>
+                        </div>
+        
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion mb-3" id="accordionFormThree">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Social Links</button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFormThree">
+                <div class="accordion-body">
+                    Three
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
