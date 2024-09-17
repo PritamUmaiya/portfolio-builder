@@ -5,6 +5,16 @@
     border-color: transparent!important;
 }
 
+.accordion-button:not(.collapsed) {
+    background-color: transparent;
+    color: var(--bs-body-color);
+    outline:none!important;
+    border:none!important;
+}
+.accordion-button:hover {
+    background-color: transparent;
+}
+
 .btn-responsive-width {
     width: 100%;
     min-width: 150px;
@@ -60,7 +70,7 @@ main {
 
 .container-main {
     width: 100%;
-    max-width: 500px;
+    max-width: 576px;
     padding: 10px;
 }
 
