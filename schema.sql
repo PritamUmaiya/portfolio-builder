@@ -14,8 +14,8 @@ CREATE TABLE user (
     phone TEXT,
     link TEXT,
     about TEXT,
-    secondary_btn TEXT NOT NULL DEFAULT 'about',  -- (cv/resume/about)
-    secondary_btn_link TEXT NOT NULL DEFAULT '#about',
+    file_url TEXT, -- (cv/resume link)
+    file_type TEXT, -- (cv/resume)
     -- Social Media & links
     facebook TEXT,
     instagram TEXT,
