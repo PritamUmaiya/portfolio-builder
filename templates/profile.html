@@ -7,7 +7,14 @@
 {% block main %}
 
     <div class="mb-3">
-        <h5 class="display-5">Edit profile</h5>
+        <h6 class="display-6">Edit profile</h6>
+    </div>
+
+    <div class="mb-3 text-center">
+        <label for="avatar" class="card p-2 rounded-circle d-inline-flex justify-content-center align-items-center object-fit-cover" style="width:120px;height:120px;">
+            <img src="{% if user.avatar %}{{ avatar }}{% else %}/static/images/user.png{% endif %}" title="User" class="rounded-circle object-fit-cover" style="width:100px;height:100px;" />
+        </label>
+        <input type="file" name="avatar" id="avatar" class="d-none" accept="image/*" />
     </div>
 
     <!--Update Basic Info: Name, Bio, Profession, Work, School-->
@@ -80,14 +87,14 @@
 
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input type="email" class="form-control" placeholder="Public email" aria-label="public_email" name="public_email" id="public_email">
+                                <input type="email" class="form-control" placeholder="Public email" aria-label="public_email" name="public_email" id="public_email" autocomplete="off">
                                 <label for="public_email">Public email</label>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input type="phone" class="form-control" placeholder="Phone number" aria-label="phone" name="phone" id="phone">
+                                <input type="phone" class="form-control" placeholder="Phone number" aria-label="phone" name="phone" id="phone" autocomplete="off">
                                 <label for="phone">Phone number</label>
                             </div>
                         </div>
@@ -242,5 +249,18 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!--Update About Me-->
+    <div class="mb-3">
+        <form action="/update_about" method="post">
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Write about me.." id="about" style="height: 100px"></textarea>
+                <label for="about">About me</label>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary btn-responsive-width">Update</button>
+            </div>
+        </form>
     </div>
 {% endblock %}
