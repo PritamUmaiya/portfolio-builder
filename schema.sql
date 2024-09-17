@@ -9,7 +9,7 @@ CREATE TABLE user (
     profession TEXT,
     works_at TEXT,
     studies_at TEXT,
-    lives_in TEXT,
+    hometown TEXT,
     public_email TEXT,  -- Visible in profile
     phone TEXT,
     link TEXT,
