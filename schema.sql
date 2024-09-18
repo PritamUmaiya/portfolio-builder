@@ -82,5 +82,6 @@ CREATE TABLE inbox (
     lname TEXT,
     email TEXT NOT NULL,
     subject TEXT NOT NULL,
-    message TEXT NOT NULL
+    message TEXT NOT NULL,
+    seen INTEGER NOT NULL DEFAULT 0 -- 1 for SEEN
 );
