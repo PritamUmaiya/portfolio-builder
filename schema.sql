@@ -2,7 +2,7 @@ CREATE TABLE user (
     id INTEGER PRIMARY KEY,
     fname TEXT NOT NULL,
     lname TEXT,
-    email TEXT NOT NULL,
+    username TEXT NOT NULL,
     password TEXT NOT NULL,  -- Hashed
     avatar TEXT,
     bio TEXT,

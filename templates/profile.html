@@ -6,295 +6,318 @@
 
 {% block main %}
 
-    <div class="mb-3">
-        <h6 class="display-6">Edit profile</h6>
+    <div class="mb-3 p-2">
+        <h3>Edit profile</h3>
     </div>
 
-    <!--Update image-->
-    <div class="mb-3 text-center">
-        <label for="avatar" class="card p-2 rounded-circle d-inline-flex justify-content-center align-items-center object-fit-cover" style="width:120px;height:120px;">
-            <img src="{% if user.avatar %}{{ avatar }}{% else %}/static/images/user.png{% endif %}" title="User" class="rounded-circle object-fit-cover" style="width:100px;height:100px;" />
-        </label>
-        <input type="file" name="avatar" id="avatar" class="d-none" accept="image/*" />
+    <div class="row g-4">
 
-        {% if user.avatar %}
-            <form action="/delete_avatar" method="post">
-                <button type="submit" class="btn btn-danger mt-2">Delete Photo</button>
-            </form>
-        {% endif %}
-    </div>
+        <div class="col-md-6">
+            <!--Update image-->
+            <div class="mb-3 card p-3 d-flex flex-row align-items-center justify-content-between">
+                <label for="avatar" class="card p-2 rounded-circle d-inline-flex justify-content-center align-items-center object-fit-cover" style="width:120px;height:120px;">
+                    <img src="{% if user.avatar %}{{ avatar }}{% else %}/static/images/user.png{% endif %}" title="User" class="rounded-circle object-fit-cover" style="width:100px;height:100px;" />
+                </label>
+                <input type="file" name="avatar" id="avatar" class="d-none" accept="image/*" />
 
-    <!--Update and add cv/resume link-->
-    <div class="mb-3">
-        <form action="/update_file" method="post">
-            <div class="row g-2 mb-3">
-                <div class="col">
-                    <div class="form-floating">
-                        <input type="url" class="form-control" placeholder="Your file url" name="file_url" id="file_url" value="{% if user.file_url %}{{ user.file_url }}{% endif %}" required>
-                        <label for="file_url">CV/Resume URL</label>
+                {% if user.avatar %}
+                    <form action="/delete_avatar" method="post">
+                        <button type="submit" class="btn btn-danger mt-2">Delete Photo</button>
+                    </form>
+                {% else %}
+                    <span>Add your profile picture</span>
+                {% endif %}
+            </div>
+
+            <!--Update and add cv/resume link-->
+            <div class="mb-3">
+                <form action="/update_file" method="post">
+                    <div class="row g-2 mb-3">
+                        <div class="col">
+                            <div class="form-floating">
+                                <input type="url" class="form-control" placeholder="Your file url" name="file_url" id="file_url" value="{% if user.file_url %}{{ user.file_url }}{% endif %}" required>
+                                <label for="file_url">CV/Resume URL</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating">
+                                <select class="form-select id="file_type" name="file_type" id="file_type" required>
+                                    <option {% if not user.file_type %}selected{% endif %} disabled>Select</option>
+                                    <option value="cv" {% if user.file_type == 'cv' %}selected{% endif %}>Download CV</option>
+                                    <option value="resume" {% if user.file_type == 'resume' %}selected{% endif %}>Download Resume</option>
+                                </select>
+                                <label for="file_type">Select file type</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
+                    </div>
+                </form>
+            </div>
+
+            <!--Update Basic Info: Name, Bio, Profession, Work, School-->
+            <div class="accordion mb-3" id="accordionFormOne">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Basic Info</button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFormOne">
+                        <div class="accordion-body">
+                            <form action="/update_basic_info" method="post">
+
+                                <div class="row g-2 mb-3">
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="fname" id="fname" value="{% if user.fname %}{{ user.fname }}{% endif %}" required>
+                                            <label for="fname">First name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="lname" id="lname" value="{% if user.lname %}{{ user.lname }}{% endif %}">
+                                            <label for="lname">Last name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" placeholder="Write your bio.." aria-label="bio" name="bio" id="bio" value="{% if user.bio %}{{ user.bio }}{% endif %}">
+                                        <label for="bio">Bio</label>
+                                    </div>
+                                    <small>Introduce yourself with short bio.</small>
+                                </div>
+                
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" placeholder="Works at" aria-label="works_at" name="works_at" id="works_at" value="{% if user.works_at %}{{ user.works_at }}{% endif %}">
+                                        <label for="works_at">Works at</label>
+                                    </div>
+                                    <small>Name of your company or organisation.</small>
+                                </div>
+                
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" placeholder="Studies at" aria-label="studies_at" name="studies_at" id="studies_at" value="{% if user.studies_at %}{{ user.studies_at }}{% endif %}">
+                                        <label for="studies_at">Studies at</label>
+                                    </div>
+                                    <small>Name of your school or collage.</small>
+                                </div>
+                
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-floating">
-                        <select class="form-select id="file_type" name="file_type" id="file_type" required>
-                            <option {% if not user.file_type %}selected{% endif %} disabled>Select</option>
-                            <option value="cv" {% if user.file_type == 'cv' %}selected{% endif %}>Download CV</option>
-                            <option value="resume" {% if user.file_type == 'resume' %}selected{% endif %}>Download Resume</option>
-                        </select>
-                        <label for="file_type">Select file type</label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <!--Update Contact details: Email, Phone, Living Town-->
+            <div class="accordion mb-3" id="accordionFormTwo">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Contact Details</button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFormTwo">
+                        <div class="accordion-body">
+                            <form action="/update_contact_details" method="post">
+
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" placeholder="Public email" aria-label="public_email" name="public_email" id="public_email" autocomplete="off" value="{% if user.public_email %}{{ user.public_email }}{% endif %}">
+                                        <label for="public_email">Public email</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="phone" class="form-control" placeholder="Phone number" aria-label="phone" name="phone" id="phone" autocomplete="off" value="{% if user.phone %}{{ user.phone }}{% endif %}">
+                                        <label for="phone">Phone number</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" placeholder="Living in" aria-label="homtown" name="hometown" id="hometown" value="{% if user.homwtown %}{{ user.hometown }}{% endif %}">
+                                        <label for="hometown">Hometown</label>
+                                    </div>
+                                </div>
+                
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="text-end">
-                <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
-            </div>
-        </form>
-    </div>
+            <!--Update Links: Website and social links-->
+            <div class="accordion mb-3" id="accordionFormThree">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Social Links</button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFormThree">
+                        <div class="accordion-body">
+                            <form action="/update_links" method="post">
 
-    <!--Update Basic Info: Name, Bio, Profession, Work, School-->
-    <div class="accordion mb-3" id="accordionFormOne">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Basic Info</button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFormOne">
-                <div class="accordion-body">
-                    <form action="/update_basic_info" method="post">
-
-                        <div class="row g-2 mb-3">
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" placeholder="First name" aria-label="First name" name="fname" id="fname" value="{% if user.fname %}{{ user.fname }}{% endif %}" required>
-                                    <label for="fname">First name</label>
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="website">
+                                            <i class="fa-solid fa-link"></i>
+                                        </span>
+                                        <input type="url" name="website" class="form-control" placeholder="Your Website url" aria-describedby="website" value="{% if user.link %}{{ user.link }}{% endif %}">
+                                    </div>        
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" name="lname" id="lname" value="{% if user.lname %}{{ user.lname }}{% endif %}">
-                                    <label for="lname">Last name</label>
+
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="facebook">
+                                            <i class="fa-brands fa-facebook"></i>
+                                        </span>
+                                        <input type="url" name="facebook" class="form-control" placeholder="Your Facebook url" aria-describedby="facebook" value="{% if user.facebook %}{{ user.facebook }}{% endif %}">
+                                    </div>        
                                 </div>
-                            </div>
+
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="instagram">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </span>
+                                        <input type="url" name="instagram" class="form-control" placeholder="Your Instagram url" aria-describedby="instagram" value="{% if user.instagram %}{{ user.instagram }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="threads">
+                                            <i class="fa-brands fa-threads"></i>
+                                        </span>
+                                        <input type="url" name="threads" class="form-control" placeholder="Your Threads url" aria-describedby="threads" value="{% if user.threads %}{{ user.threads }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="twitter_x">
+                                            <i class="fa-brands fa-x-twitter"></i>
+                                        </span>
+                                        <input type="url" name="twitter_x" class="form-control" placeholder="Your Twitter/X url" aria-describedby="twitter_x" value="{% if user.twitter_x %}{{ user.twitter_x }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="linkedin">
+                                            <i class="fa-brands fa-linkedin"></i>
+                                        </span>
+                                        <input type="url" name="linkedin" class="form-control" placeholder="Your LinkedIn url" aria-describedby="linkedin" value="{% if user.linkedin %}{{ user.linkedin }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="github">
+                                            <i class="fa-brands fa-github"></i>
+                                        </span>
+                                        <input type="url" name="github" class="form-control" placeholder="Your GitHub url" aria-describedby="github" value="{% if user.github %}{{ user.github }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="gitlab">
+                                            <i class="fa-brands fa-gitlab"></i>
+                                        </span>
+                                        <input type="url" name="gitlab" class="form-control" placeholder="Your GitLab url" aria-describedby="gitlab" value="{% if user.gitlab %}{{ user.gitlab }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="youtube">
+                                            <i class="fa-brands fa-youtube"></i>
+                                        </span>
+                                        <input type="url" name="youtube" class="form-control" placeholder="Your YouTube url" aria-describedby="youtube" value="{% if user.youtube %}{{ user.youtube }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="twitch">
+                                            <i class="fa-brands fa-twitch"></i>
+                                        </span>
+                                        <input type="url" name="twitch" class="form-control" placeholder="Your Twitch url" aria-describedby="twitch" value="{% if user.twitch %}{{ user.twitch }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="medium">
+                                            <i class="fa-brands fa-medium"></i>
+                                        </span>
+                                        <input type="url" name="medium" class="form-control" placeholder="Your Medium url" aria-describedby="medium" value="{% if user.medium %}{{ user.medium }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="behance">
+                                            <i class="fa-brands fa-behance"></i>
+                                        </span>
+                                        <input type="url" name="behance" class="form-control" placeholder="Your Behance url" aria-describedby="behance" value="{% if user.behance %}{{ user.behance }}{% endif %}">
+                                    </div>        
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="input-group flex-nowrap">
+                                        <span class="input-group-text" id="dribbble">
+                                            <i class="fa-brands fa-dribbble"></i>
+                                        </span>
+                                        <input type="url" name="dribbble" class="form-control" placeholder="Your Dribbble url" aria-describedby="dribbble" value="{% if user.dribbble %}{{ user.dribbble }}{% endif %}">
+                                    </div>        
+                                </div>                        
+
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
+                                </div>
+                            </form>
                         </div>
-        
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Write your bio.." aria-label="bio" name="bio" id="bio" value="{% if user.bio %}{{ user.bio }}{% endif %}">
-                                <label for="bio">Bio</label>
-                            </div>
-                            <small>Introduce yourself with short bio.</small>
-                        </div>
-        
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Works at" aria-label="works_at" name="works_at" id="works_at" value="{% if user.works_at %}{{ user.works_at }}{% endif %}">
-                                <label for="works_at">Works at</label>
-                            </div>
-                            <small>Name of your company or organisation.</small>
-                        </div>
-        
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Studies at" aria-label="studies_at" name="studies_at" id="studies_at" value="{% if user.studies_at %}{{ user.studies_at }}{% endif %}">
-                                <label for="studies_at">Studies at</label>
-                            </div>
-                            <small>Name of your school or collage.</small>
-                        </div>
-        
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!--Update Contact details: Email, Phone, Living Town-->
-    <div class="accordion mb-3" id="accordionFormTwo">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Contact Details</button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFormTwo">
-                <div class="accordion-body">
-                    <form action="/update_contact_details" method="post">
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="email" class="form-control" placeholder="Public email" aria-label="public_email" name="public_email" id="public_email" autocomplete="off" value="{% if user.public_email %}{{ user.public_email }}{% endif %}">
-                                <label for="public_email">Public email</label>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="phone" class="form-control" placeholder="Phone number" aria-label="phone" name="phone" id="phone" autocomplete="off" value="{% if user.phone %}{{ user.phone }}{% endif %}">
-                                <label for="phone">Phone number</label>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" placeholder="Living in" aria-label="homtown" name="hometown" id="hometown" value="{% if user.homwtown %}{{ user.hometown }}{% endif %}">
-                                <label for="hometown">Hometown</label>
-                            </div>
-                        </div>
-        
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
-                        </div>
-                    </form>
-                </div>
+            <!--Update About Me-->
+            <div class="mb-3">
+                <form action="/update_about" method="post">
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Write about me.." id="about" style="height:100px;">{% if user.about %}{{ user.about }}{% endif %}</textarea>
+                        <label for="about">About me</label>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary btn-responsive-width">Update</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 
-    <!--Update Links: Website and social links-->
-    <div class="accordion mb-3" id="accordionFormThree">
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Social Links</button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFormThree">
-                <div class="accordion-body">
-                    <form action="/update_links" method="post">
-
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="website">
-                                    <i class="fa-solid fa-link"></i>
-                                </span>
-                                <input type="url" name="website" class="form-control" placeholder="Your Website url" aria-describedby="website" value="{% if user.link %}{{ user.link }}{% endif %}">
-                            </div>        
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="facebook">
-                                    <i class="fa-brands fa-facebook"></i>
-                                </span>
-                                <input type="url" name="facebook" class="form-control" placeholder="Your Facebook url" aria-describedby="facebook" value="{% if user.facebook %}{{ user.facebook }}{% endif %}">
-                            </div>        
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="instagram">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </span>
-                                <input type="url" name="instagram" class="form-control" placeholder="Your Instagram url" aria-describedby="instagram" value="{% if user.instagram %}{{ user.instagram }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="threads">
-                                    <i class="fa-brands fa-threads"></i>
-                                </span>
-                                <input type="url" name="threads" class="form-control" placeholder="Your Threads url" aria-describedby="threads" value="{% if user.threads %}{{ user.threads }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="twitter_x">
-                                    <i class="fa-brands fa-x-twitter"></i>
-                                </span>
-                                <input type="url" name="twitter_x" class="form-control" placeholder="Your Twitter/X url" aria-describedby="twitter_x" value="{% if user.twitter_x %}{{ user.twitter_x }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="linkedin">
-                                    <i class="fa-brands fa-linkedin"></i>
-                                </span>
-                                <input type="url" name="linkedin" class="form-control" placeholder="Your LinkedIn url" aria-describedby="linkedin" value="{% if user.linkedin %}{{ user.linkedin }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="github">
-                                    <i class="fa-brands fa-github"></i>
-                                </span>
-                                <input type="url" name="github" class="form-control" placeholder="Your GitHub url" aria-describedby="github" value="{% if user.github %}{{ user.github }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="gitlab">
-                                    <i class="fa-brands fa-gitlab"></i>
-                                </span>
-                                <input type="url" name="gitlab" class="form-control" placeholder="Your GitLab url" aria-describedby="gitlab" value="{% if user.gitlab %}{{ user.gitlab }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="youtube">
-                                    <i class="fa-brands fa-youtube"></i>
-                                </span>
-                                <input type="url" name="youtube" class="form-control" placeholder="Your YouTube url" aria-describedby="youtube" value="{% if user.youtube %}{{ user.youtube }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="twitch">
-                                    <i class="fa-brands fa-twitch"></i>
-                                </span>
-                                <input type="url" name="twitch" class="form-control" placeholder="Your Twitch url" aria-describedby="twitch" value="{% if user.twitch %}{{ user.twitch }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="medium">
-                                    <i class="fa-brands fa-medium"></i>
-                                </span>
-                                <input type="url" name="medium" class="form-control" placeholder="Your Medium url" aria-describedby="medium" value="{% if user.medium %}{{ user.medium }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="behance">
-                                    <i class="fa-brands fa-behance"></i>
-                                </span>
-                                <input type="url" name="behance" class="form-control" placeholder="Your Behance url" aria-describedby="behance" value="{% if user.behance %}{{ user.behance }}{% endif %}">
-                            </div>        
-                        </div>
-                        
-                        <div class="mb-3">
-                            <div class="input-group flex-nowrap">
-                                <span class="input-group-text" id="dribbble">
-                                    <i class="fa-brands fa-dribbble"></i>
-                                </span>
-                                <input type="url" name="dribbble" class="form-control" placeholder="Your Dribbble url" aria-describedby="dribbble" value="{% if user.dribbble %}{{ user.dribbble }}{% endif %}">
-                            </div>        
-                        </div>                        
-
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary btn-responsive-width">Save</button>
-                        </div>
-                    </form>
-                </div>
+        <div class="col-12">
+            <div class="mb-3 p-2">
+                <h3>Add or update profile sections</h3>
+            </div>
+            <div class="mb-3">
+                <p style="line-height:3;">
+                    <a href="/profile/edit/education" title="Education" class="btn btn-success">Education</a>
+                    <a href="/profile/edit/experiences" title="Experiences" class="btn btn-info">Experiences</a>
+                    <a href="/profile/edit/achievements" title="Achievements" class="btn btn-primary">Achievements</a>
+                    <a href="/profile/edit/certifications" title="Certifications" class="btn btn-warning">Certifications</a>
+                    <a href="/profile/edit/skills" title="Skill" class="btn btn-danger">Skills</a>
+                </p>
             </div>
         </div>
-    </div>
-
-    <!--Update About Me-->
-    <div class="mb-3">
-        <form action="/update_about" method="post">
-            <div class="form-floating mb-3">
-                <textarea class="form-control" placeholder="Write about me.." id="about" style="height: 100px">{% if user.about %}{{ user.about }}{% endif %}</textarea>
-                <label for="about">About me</label>
-            </div>
-            <div class="text-end">
-                <button type="submit" class="btn btn-primary btn-responsive-width">Update</button>
-            </div>
-        </form>
     </div>
 {% endblock %}
