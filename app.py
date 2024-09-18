@@ -1,6 +1,6 @@
 from cs50 import SQL
 from datetime import datetime, timedelta
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 import os
 from werkzeug.utils import secure_filename
@@ -93,6 +93,26 @@ def remove_avatar():
 
     db.execute("UPDATE user SET avatar = NULL")
     return redirect(request.referrer)
+
+
+@app.route("/update_file", methods=["POST"])
+def update_file():
+    """Update CV/Resume"""
+    file_url = request.form.get('file_url')
+    file_type = request.form.get('file_type')
+
+    if not file_url:
+        # Remove file
+        db.execute("UPDATE user SET file_url = NULL, file_type = NULL")
+        flash('File removed!')
+        return redirect(request.referrer)
+
+    if not file_type or file_type not in ['cv', 'resume']:
+        return apology('Please select a file type!')
+
+    db.execute("UPDATE user SET file_url = ?, file_type = ?", file_url, file_type)
+    return redirect(request.referrer)
+    
 
 
 if __name__ == "__main__":

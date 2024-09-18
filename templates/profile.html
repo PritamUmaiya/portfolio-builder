@@ -37,7 +37,7 @@
                     <div class="row g-2 mb-3">
                         <div class="col">
                             <div class="form-floating">
-                                <input type="url" class="form-control" placeholder="Your file url" name="file_url" id="file_url" value="{% if user.file_url %}{{ user.file_url }}{% endif %}" required>
+                                <input type="url" class="form-control" placeholder="Your file url" name="file_url" id="file_url" value="{% if user.file_url %}{{ user.file_url }}{% endif %}">
                                 <label for="file_url">CV/Resume URL</label>
                             </div>
                         </div>
@@ -45,8 +45,8 @@
                             <div class="form-floating">
                                 <select class="form-select id="file_type" name="file_type" id="file_type" required>
                                     <option {% if not user.file_type %}selected{% endif %} disabled>Select</option>
-                                    <option value="cv" {% if user.file_type == 'cv' %}selected{% endif %}>Download CV</option>
-                                    <option value="resume" {% if user.file_type == 'resume' %}selected{% endif %}>Download Resume</option>
+                                    <option value="cv" {% if user.file_type == 'cv' %}selected{% endif %}>CV</option>
+                                    <option value="resume" {% if user.file_type == 'resume' %}selected{% endif %}>Resume</option>
                                 </select>
                                 <label for="file_type">Select file type</label>
                             </div>
