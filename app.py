@@ -35,16 +35,16 @@ def index():
     return render_template("index.html")
 
 
-@login_required
 @app.route("/dashboard")
+@login_required
 def dashboard():
     """Dashboard Page"""
     users = db.execute("SELECT * FROM user WHERE id = ?", session['user_id'])
     return render_template("dashboard.html", user=users[0], active_tab='dashboard')
 
 
-@login_required
 @app.route("/profile/manage")
+@login_required
 def profile():
     """Profile Page"""
     users = db.execute("SELECT * FROM user WHERE id = ?", session['user_id'])
@@ -52,8 +52,8 @@ def profile():
 
 
 ''' ACTIONS '''
-@login_required
 @app.route("/update_avatar", methods=["POST"])
+@login_required
 def update_avatar():
     """Upload user avatar"""
     avatar = request.files['avatar']
@@ -85,8 +85,8 @@ def update_avatar():
     return redirect(request.referrer)
 
 
-@login_required
 @app.route("/remove_avatar", methods=["POST"])
+@login_required
 def remove_avatar():
     """Remove user avatar"""
     avatar = db.execute("SELECT avatar FROM user")
@@ -99,8 +99,8 @@ def remove_avatar():
     return redirect(request.referrer)
 
 
-@login_required
 @app.route("/update_file", methods=["POST"])
+@login_required
 def update_file():
     """Update CV/Resume"""
     file_url = request.form.get('file_url')
@@ -119,8 +119,8 @@ def update_file():
     return redirect(request.referrer)
     
 
-@login_required
 @app.route("/update_basic_info", methods=["POST"])
+@login_required
 def update_basic_info():
     """Update user's basic info"""
     fname = request.form.get('fname')
@@ -144,7 +144,7 @@ def update_basic_info():
         "UPDATE user SET fname = ?, lname = ?, bio = ?, works_at = ?, studies_at = ? WHERE id = ?",
         fname, lname, bio, works_at, studies_at, session["user_id"]  # Assuming you're using session to track the logged-in user
     )
-
+    flash('Profile updated!')
     return redirect(request.referrer)
 
 
@@ -158,7 +158,7 @@ def login():
         if not username or not password:
             return apology('Please enter your username and password!')
 
-        users = db.execute('SELECT password FROM user WHERE username = ?', username)
+        users = db.execute('SELECT id, password FROM user WHERE username = ?', username)
 
         # Ensure username exists and password is correct
         if len(users) != 1 or not check_password_hash(users[0]["password"], password):
@@ -170,6 +170,11 @@ def login():
     else:
         return render_template('login.html')
 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
 
 if __name__ == "__main__":
     app.run(debug=True)
